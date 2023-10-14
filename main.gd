@@ -17,6 +17,8 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
+	$Music.stop()
+	$DeathSound.play()
 	
 func new_game():
 	get_tree().call_group("mobs", "queue_free")
@@ -25,6 +27,7 @@ func new_game():
 	$HUD.show_message("Get ready!")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	$Music.play()
 
 
 func _on_mob_timer_timeout():
@@ -40,7 +43,7 @@ func _on_mob_timer_timeout():
 	direction += randf_range(-PI / 4, PI / 4)
 	mob.rotation = direction
 	
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	var velocity = Vector2(randf_range(50.0, 150.0), 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
 	
 	add_child(mob)
