@@ -1,5 +1,6 @@
 extends Area2D
 signal hit
+signal pickup
 
 @export var speed = 400
 var screen_size
@@ -54,9 +55,12 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	hide()
-	hit.emit()
-	$CollisionShape2D.set_deferred('disabled', true)
+	if (body.is_in_group('mobs')):
+		hide()
+		hit.emit()
+		$CollisionShape2D.set_deferred('disabled', true)
+	if (body.is_in_group('consumables')):
+		pickup.emit(body)
 
 func start(pos):
 	position = pos
