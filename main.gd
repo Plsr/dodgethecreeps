@@ -37,13 +37,13 @@ func _on_mob_timer_timeout():
 	mob_spwan_location.progress_ratio = randf()
 	
 	var direction = mob_spwan_location.rotation + PI / 2
-	
+
 	mob.position = mob_spwan_location.position
 	
 	direction += randf_range(-PI / 4, PI / 4)
-	mob.rotation = direction
+	mob.rotation = direction + PI / 2
 	
-	var velocity = Vector2(randf_range(50.0, 150.0), 0.0)
+	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
 	
 	add_child(mob)

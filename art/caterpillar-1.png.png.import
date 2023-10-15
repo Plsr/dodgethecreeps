@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fmbx351icrc5"
-path="res://.godot/imported/enemySwimming_1.png-dd0e11759dc3d624c8a704f6e98a3d80.ctex"
+uid="uid://dmx3u5usdxrq4"
+path="res://.godot/imported/caterpillar-1.png.png-2c165ca92eba0eb4faf598103aab5e6c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/enemySwimming_1.png"
-dest_files=["res://.godot/imported/enemySwimming_1.png-dd0e11759dc3d624c8a704f6e98a3d80.ctex"]
+source_file="res://art/caterpillar-1.png.png"
+dest_files=["res://.godot/imported/caterpillar-1.png.png-2c165ca92eba0eb4faf598103aab5e6c.ctex"]
 
 [params]
 

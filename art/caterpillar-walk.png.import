@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4kmyy8jg80rc"
-path="res://.godot/imported/playerGrey_up2.png-d6aba85f5f2675ebc7045efa7552ee79.ctex"
+uid="uid://dlyu8imluxk43"
+path="res://.godot/imported/caterpillar-walk.png-116ca366a893a1d662136361df162488.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/playerGrey_up2.png"
-dest_files=["res://.godot/imported/playerGrey_up2.png-d6aba85f5f2675ebc7045efa7552ee79.ctex"]
+source_file="res://art/caterpillar-walk.png"
+dest_files=["res://.godot/imported/caterpillar-walk.png-116ca366a893a1d662136361df162488.ctex"]
 
 [params]
 

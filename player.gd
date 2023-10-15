@@ -33,13 +33,24 @@ func _process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
+	
+	
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = "walk"
 		$AnimatedSprite2D.flip_v = false
-		$AnimatedSprite2D.flip_h = velocity.x < 0
+		$AnimatedSprite2D.flip_h = velocity.x > 0
+
+		# Adapt collisionshape to rotated sprite
+		if $CollisionShape2D.rotation != (PI / 2):
+			$CollisionShape2D.set_rotation(PI / 2)
+			
 	if velocity.y != 0:
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
+		
+		# Adapt collisionshape to rotated sprite
+		if $CollisionShape2D.rotation != 0:
+			$CollisionShape2D.set_rotation(0)
 
 
 func _on_body_entered(body):
