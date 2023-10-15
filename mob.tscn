@@ -19,8 +19,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_auth7"]
-radius = 17.0
-height = 52.0
+radius = 15.0
+height = 42.0
 
 [node name="Mob" type="RigidBody2D" groups=["mobs"]]
 position = Vector2(-2, 2)
@@ -30,7 +30,7 @@ script = ExtResource("1_5ep0s")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_cyfiw")
 animation = &"mob"
 
