@@ -6,6 +6,7 @@ var score_threshold = 3
 var level = 1
 var level_instance: Node
 @onready var main_2d: Node = $Main2D
+@onready var level_finished_sound: AudioStreamPlayer2D = $LevelFinished
 
 
 # Called when the node enters the scene tree for the first time.
@@ -60,5 +61,6 @@ func _on_player_hit():
 
 func _on_level_finished():
 	$HUD.show_level_finished()
+	level_finished_sound.play()
 	level += 1
 	unload_level()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cplgt6tm3i4kq"]
+[gd_scene load_steps=7 format=3 uid="uid://cplgt6tm3i4kq"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_g2x3v"]
 [ext_resource type="PackedScene" uid="uid://31goa6rk6agq" path="res://mob.tscn" id="2_2ysmj"]
 [ext_resource type="PackedScene" uid="uid://cwjbepp1uay8p" path="res://leaf.tscn" id="3_4q66c"]
 [ext_resource type="PackedScene" uid="uid://ci1gij6yylrgg" path="res://hud.tscn" id="4_a4xvj"]
 [ext_resource type="AudioStream" uid="uid://qbihpnagwjf8" path="res://art/gameover.wav" id="5_7hbln"]
+[ext_resource type="AudioStream" uid="uid://c0og3moehgihp" path="res://art/level_finished.wav" id="6_41fxn"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_g2x3v")
@@ -25,5 +26,8 @@ color = Color(0.627451, 0.0313726, 1, 1)
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_7hbln")
+
+[node name="LevelFinished" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_41fxn")
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
