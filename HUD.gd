@@ -29,8 +29,9 @@ func show_level_finished():
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
 	
-func update_score(score):
-	$ScoreLabel.text = str(score)
+func update_level_label(level):
+	var level_string = "Level " + str(level)
+	$LevelLabel.text = level_string
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

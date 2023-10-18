@@ -1,12 +1,14 @@
 extends Node
+
 @export var mob_scene: PackedScene
 @export var consumable_scene: PackedScene
-var score
-var score_threshold = 3
-var level = 1
-var level_instance: Node
+
 @onready var main_2d: Node = $Main2D
 @onready var level_finished_sound: AudioStreamPlayer2D = $LevelFinished
+@onready var hud: CanvasLayer = $HUD
+
+var level = 1
+var level_instance: Node
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,8 +23,8 @@ func _process(delta):
 
 func game_over():
 	$DeathSound.play()
-	$HUD.show()
-	$HUD.show_game_over()
+	hud.show()
+	hud.show_game_over()
 	unload_level()
 
 
@@ -46,12 +48,12 @@ func load_level():
 
 
 func new_game():
-	$HUD.hide_message()
+	hud.hide_message()
 	load_level()
 
 
 func _on_player_hit():
-	# This is just a stup for later
+	# Stub for later
 	var lifes = 1
 	lifes -= 1
 	
@@ -60,7 +62,8 @@ func _on_player_hit():
 
 
 func _on_level_finished():
-	$HUD.show_level_finished()
-	level_finished_sound.play()
 	level += 1
+	hud.show_level_finished()
+	hud.update_level_label(level)
+	level_finished_sound.play()
 	unload_level()
