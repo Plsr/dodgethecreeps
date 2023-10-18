@@ -3,6 +3,7 @@ signal hit
 signal pickup
 
 @export var speed = 400
+@export var frozen: bool = false
 var screen_size
 
 
@@ -14,6 +15,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if(!frozen):
+		move(delta)
+	
+func move(delta):
 	var velocity = Vector2.ZERO
 	
 	if Input.is_action_pressed("move_right"):
@@ -66,3 +71,6 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+
+func freeze():
+	frozen = true

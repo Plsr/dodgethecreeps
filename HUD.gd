@@ -17,6 +17,17 @@ func show_game_over():
 	
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
+
+func show_level_finished():
+	show_message("Level finished!")
+	
+	await $MessageTimer.timeout
+	
+	$Message.text = "Next Level"
+	$Message.show()
+	
+	await get_tree().create_timer(1.0).timeout
+	$StartButton.show()
 	
 func update_score(score):
 	$ScoreLabel.text = str(score)
@@ -30,6 +41,8 @@ func _ready():
 func _process(delta):
 	pass
 
+func hide_message():
+	$Message.hide()
 
 func _on_message_timer_timeout():
 	$Message.hide()

@@ -2,6 +2,10 @@ extends Node
 @export var mob_scene: PackedScene
 @export var consumable_scene: PackedScene
 var score
+var score_threshold = 3
+var level = 1
+var level_instance: Node
+@onready var main_2d: Node = $Main2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,65 +19,46 @@ func _process(delta):
 
 
 func game_over():
-	$MobTimer.stop()
-	$HUD.show_game_over()
-	$Music.stop()
 	$DeathSound.play()
-	$ConsumableTimer.stop()
+	$HUD.show()
+	$HUD.show_game_over()
+	unload_level()
+
+
+func unload_level():
+	if(is_instance_valid(level_instance)):
+		level_instance.queue_free()
+		level_instance = null
+
+
+func load_level():
+	var level_name = "level_caterpillar"
+	var level_path = "res://levels/%s.tscn" % level_name
+	var level_resource := load(level_path)
 	
+	if(level_resource):
+		level_instance = level_resource.instantiate()
+		level_instance.player_hit.connect(_on_player_hit)
+		level_instance.level_finished.connect(_on_level_finished)
+		level_instance.score_needed = level * 3
+		main_2d.add_child(level_instance)
+
+
 func new_game():
-	get_tree().call_group("mobs", "queue_free")
-	score = 0
-	$HUD.update_score(score)
-	$HUD.show_message("Get ready!")
-	$Player.start($StartPosition.position)
-	$StartTimer.start()
-	$Music.play()
+	$HUD.hide_message()
+	load_level()
 
 
-func _on_mob_timer_timeout():
-	var mob = mob_scene.instantiate()
+func _on_player_hit():
+	# This is just a stup for later
+	var lifes = 1
+	lifes -= 1
 	
-	var mob_spwan_location = get_node("MobPath/MobSpawnLocation")
-	mob_spwan_location.progress_ratio = randf()
-	
-	var direction = mob_spwan_location.rotation + PI / 2
-
-	mob.position = mob_spwan_location.position
-	
-	direction += randf_range(-PI / 4, PI / 4)
-	mob.rotation = direction + PI / 2
-	mob.name = "mob"
-	
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	mob.linear_velocity = velocity.rotated(direction)
-	
-	add_child(mob)
-
-func _on_start_timer_timeout():
-	$MobTimer.start()
-	$ConsumableTimer.start()
+	if(lifes == 0):
+		game_over()
 
 
-# TODO: Spawn at random position inside spawn area
-func _on_consumable_timer_timeout():
-	var leaf = consumable_scene.instantiate()
-	
-	var rand_x = randi_range(0, $ConsumablesSpawnArea.get_rect().size.x)
-	var rand_y = randi_range(0, $ConsumablesSpawnArea.get_rect().size.y)
-	
-	var leaf_position = Vector2(rand_x, rand_y)
-	leaf.position = leaf_position
-	leaf.points = 1
-	
-	add_child(leaf)
-
-
-func _on_player_pickup(item):
-	if(item.is_in_group("consumables")):
-		score += item.points
-		$HUD.update_score(score)
-		item.queue_free()
-	# Safeguard, should never happen but will prevent crashes
-	else:
-		item.queue_free()
+func _on_level_finished():
+	$HUD.show_level_finished()
+	level += 1
+	unload_level()
